@@ -1,4 +1,5 @@
-Spree::Admin::BaseController.class_eval do
+module Spree::Admin::BaseControllerDecorator
+  
   def authorize_admin
     begin
       if params[:id]
@@ -24,4 +25,7 @@ Spree::Admin::BaseController.class_eval do
     def new_action?
       NEW_ACTIONS.include?(params[:action].to_sym)
     end
+
 end
+
+::Spree::Admin::BaseController.prepend(Spree::Admin::BaseControllerDecorator)
